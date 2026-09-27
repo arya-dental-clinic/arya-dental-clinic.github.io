@@ -18,7 +18,6 @@
       --navy-dark: #051626;
       --primary-blue: #0284c7;
       --accent-cyan: #06b6d4;
-      --accent-teal: #0f766e;
       --light-blue-bg: #f0f9ff;
       --bg-cream: #f8fafc;
       --text-dark: #0f172a;
@@ -45,14 +44,14 @@
     a { text-decoration: none; color: inherit; }
     .container { max-width: 1220px; margin: 0 auto; padding: 0 20px; }
 
-    /* Top Rating & Helpline Strip */
+    /* Top Strip */
     .top-strip {
       background: var(--navy-dark); color: #cbd5e1; font-size: 0.85rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .top-strip-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .badge-pill-top { background: rgba(6,182,212,0.2); color: #38bdf8; padding: 3px 10px; border-radius: 20px; font-weight: 700; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 5px; }
 
-    /* Header & Navigation */
+    /* Header */
     header {
       position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(12px); box-shadow: 0 2px 15px rgba(0,0,0,0.05);
@@ -107,7 +106,7 @@
     }
 
     /* Section Headers */
-    .sec-header { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .sec-header { text-align: center; max-width: 720px; margin: 0 auto 35px; }
     .section-tag {
       color: var(--primary-blue); font-size: 0.82rem; font-weight: 800; letter-spacing: 1.5px;
       text-transform: uppercase; display: inline-block; margin-bottom: 8px;
@@ -115,7 +114,7 @@
     .section-heading { font-size: 2.3rem; font-weight: 800; color: var(--primary-navy); line-height: 1.25; margin-bottom: 12px; }
     .sec-sub { color: var(--text-muted); font-size: 1rem; }
 
-    /* DENTAL COST CALCULATOR (Avana-style High Value Feature) */
+    /* DENTAL COST CALCULATOR */
     .calculator-sec { padding: 75px 0; background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%); }
     .calc-wrapper {
       background: #ffffff; border-radius: 26px; padding: 40px; box-shadow: var(--shadow-soft);
@@ -143,12 +142,54 @@
     }
     .calc-wa-btn:hover { background: #1eb956; transform: translateY(-2px); }
 
-    /* DETAILED TREATMENTS SECTION (Avana Style with Procedure Details) */
-    .treatments-sec { padding: 80px 0; background: var(--bg-cream); }
-    .treatment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 26px; }
+    /* ==========================================================
+       AUTOMATIC SLIDER / CAROUSEL STYLES (AVANA DENTAL LOOK)
+       ========================================================== */
+    .slider-container-wrap { position: relative; width: 100%; }
+    .slider-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 15px 5px 25px;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .slider-track::-webkit-scrollbar { display: none; }
+    .slider-slide {
+      flex: 0 0 calc(33.333% - 16px);
+      min-width: 320px;
+      scroll-snap-align: start;
+    }
+    @media (max-width: 992px) {
+      .slider-slide { flex: 0 0 calc(50% - 12px); min-width: 290px; }
+    }
+    @media (max-width: 650px) {
+      .slider-slide { flex: 0 0 92%; min-width: 270px; }
+    }
+
+    /* Slider Navigation Controls */
+    .slider-nav-btn {
+      position: absolute; top: 48%; transform: translateY(-50%); width: 44px; height: 44px;
+      border-radius: 50%; background: #ffffff; border: 1px solid #cbd5e1; box-shadow: var(--shadow-soft);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;
+      color: var(--primary-navy); transition: all 0.3s ease;
+    }
+    .slider-nav-btn:hover { background: var(--primary-blue); color: #fff; border-color: var(--primary-blue); }
+    .slider-nav-btn.prev { left: -18px; }
+    .slider-nav-btn.next { right: -18px; }
+
+    /* Indicator Dots */
+    .slider-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 15px; }
+    .slider-dot { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
+    .slider-dot.active { width: 26px; border-radius: 10px; background: var(--primary-blue); }
+
+    /* Card Layouts Inside Sliders */
     .treatment-card-detailed {
-      background: #fff; border-radius: 22px; padding: 28px; border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
+      background: #fff; border-radius: 22px; padding: 26px; border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+      transition: 0.3s;
     }
     .treatment-card-detailed:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary-blue); }
     .card-top-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
@@ -157,17 +198,13 @@
       display: flex; align-items: center; justify-content: center;
     }
     .treatment-price-badge { background: #f0fdf4; color: #16a34a; font-weight: 800; font-size: 0.88rem; padding: 6px 12px; border-radius: 20px; border: 1px solid #bbf7d0; }
-    .treatment-name { font-size: 1.3rem; color: var(--primary-navy); margin-bottom: 8px; }
+    .treatment-name { font-size: 1.25rem; color: var(--primary-navy); margin-bottom: 8px; }
     .treatment-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.55; }
-    
-    .treatment-specs-list {
-      background: #f8fafc; border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; border: 1px solid #edf2f7;
-    }
+    .treatment-specs-list { background: #f8fafc; border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; border: 1px solid #edf2f7; }
     .spec-row { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px; }
     .spec-row:last-child { margin-bottom: 0; }
     .spec-row span { color: #64748b; }
     .spec-row strong { color: var(--primary-navy); font-weight: 700; }
-
     .treatment-card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
     .btn-card-calc {
       background: #f1f5f9; color: var(--primary-navy); padding: 10px; border-radius: 10px; font-weight: 700; font-size: 0.82rem;
@@ -180,31 +217,11 @@
     }
     .btn-card-wa:hover { background: #0369a1; }
 
-    /* Doctor Profile */
-    .doctor-profile-sec { padding: 80px 0; background: #fff; border-top: 1px solid #edf2f7; }
-    .doctor-grid { display: grid; grid-template-columns: 360px 1fr; gap: 50px; align-items: center; }
-    .doctor-card {
-      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 26px; padding: 30px;
-      text-align: center; border: 1px solid #bae6fd; box-shadow: var(--shadow-soft);
-    }
-    .doctor-avatar {
-      width: 190px; height: 190px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px;
-      border: 5px solid #fff; box-shadow: var(--shadow-soft);
-    }
-    .badge-pill {
-      background: #0284c7; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
-      display: inline-block; margin-bottom: 10px;
-    }
-    .doctor-perks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
-    .perk-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.92rem; color: #1e293b; }
-    .perk-item i { color: #0284c7; width: 20px; height: 20px; flex-shrink: 0; }
-
-    /* Curated Packages */
+    /* Packages */
     .packages-sec { padding: 80px 0; background: var(--bg-cream); }
-    .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
     .package-card {
       border: 1px solid var(--card-border); border-radius: 22px; overflow: hidden; background: #fff;
-      display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s; position: relative;
+      display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: all 0.3s; position: relative;
     }
     .package-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--primary-blue); }
     .package-badge {
@@ -225,31 +242,53 @@
 
     /* Results Cases */
     .cases-sec { padding: 80px 0; background: #fff; }
-    .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; }
-    .case-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); }
-    .case-split-img { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #e2e8f0; height: 240px; position: relative; }
+    .case-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); height: 100%; display: flex; flex-direction: column; }
+    .case-split-img { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #e2e8f0; height: 230px; position: relative; }
     .case-split-img .img-box { position: relative; height: 100%; width: 100%; overflow: hidden; }
     .case-split-img img { width: 100%; height: 100%; object-fit: cover; }
     .case-tag {
       position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.75); color: #fff; font-size: 0.72rem;
       padding: 3px 8px; border-radius: 6px; font-weight: 700; z-index: 2;
     }
-    .case-content { padding: 20px; }
+    .case-content { padding: 20px; flex-grow: 1; }
 
-    /* Doctors in Action */
+    /* Placeholder Box Styling for Future Additions */
+    .case-placeholder-box {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: #f1f5f9; border: 2px dashed #cbd5e1; height: 100%; min-height: 230px; text-align: center; padding: 15px; color: #64748b;
+    }
+
+    /* Video Actions */
     .action-sec { padding: 80px 0; background: var(--bg-cream); }
-    .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
-    .action-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); }
-    .action-card video { width: 100%; height: 320px; object-fit: cover; background: #0f172a; }
+    .action-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); height: 100%; }
+    .action-card video { width: 100%; height: 310px; object-fit: cover; background: #0f172a; }
     .action-card-info { padding: 16px; }
 
-    /* Video Reviews */
+    /* Video Testimonials */
     .testi-sec { padding: 80px 0; background: #fff; }
-    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .testi-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); }
-    .testi-card video { width: 100%; height: 340px; object-fit: cover; background: #0f172a; }
+    .testi-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); height: 100%; }
+    .testi-card video { width: 100%; height: 320px; object-fit: cover; background: #0f172a; }
     .testi-card-content { padding: 18px; }
     .stars { color: var(--star-color); letter-spacing: 2px; }
+
+    /* Doctor Profile */
+    .doctor-profile-sec { padding: 80px 0; background: #fff; border-top: 1px solid #edf2f7; }
+    .doctor-grid { display: grid; grid-template-columns: 360px 1fr; gap: 50px; align-items: center; }
+    .doctor-card {
+      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 26px; padding: 30px;
+      text-align: center; border: 1px solid #bae6fd; box-shadow: var(--shadow-soft);
+    }
+    .doctor-avatar {
+      width: 190px; height: 190px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px;
+      border: 5px solid #fff; box-shadow: var(--shadow-soft);
+    }
+    .badge-pill {
+      background: #0284c7; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
+      display: inline-block; margin-bottom: 10px;
+    }
+    .doctor-perks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
+    .perk-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.92rem; color: #1e293b; }
+    .perk-item i { color: #0284c7; width: 20px; height: 20px; flex-shrink: 0; }
 
     /* FAQ Section */
     .faq-sec { padding: 80px 0; background: var(--bg-cream); }
@@ -294,9 +333,22 @@
     .social-icon-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .social-icon-btn.facebook { background: #1877f2; }
     .social-icon-btn.youtube { background: #ff0000; }
-    .social-icon-btn:hover { transform: translateY(-3px); }
 
-    /* Mobile Fixed Bottom Bar */
+    /* ==========================================================
+       SIDE FLOATING CALL & WHATSAPP BUTTONS (LEFT & RIGHT)
+       ========================================================== */
+    .floating-side-btn {
+      position: fixed; z-index: 999; display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      transition: all 0.3s ease; text-decoration: none; color: #fff !important;
+    }
+    .floating-side-btn:hover { transform: scale(1.1); }
+    /* Left Call Button */
+    .float-call-left { bottom: 85px; left: 20px; background: var(--primary-blue); }
+    /* Right WhatsApp Button */
+    .float-wa-right { bottom: 85px; right: 20px; background: var(--whatsapp-green); }
+
+    /* Mobile Sticky Bottom Bar */
     .mobile-bar {
       position: fixed; bottom: 0; left: 0; right: 0; height: 68px; background: #ffffff;
       box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08); display: flex; justify-content: space-around;
@@ -316,17 +368,26 @@
       .hero-title { font-size: 2.2rem; }
       .floating-card-rating { position: static; margin-top: 15px; }
       .form-grid { grid-template-columns: 1fr; }
+      .slider-nav-btn { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Side Floating Buttons (Call on Left, WhatsApp on Right) -->
+  <a href="tel:+917755846498" class="floating-side-btn float-call-left" title="Call Clinic">
+    <i data-lucide="phone-call" style="width:24px; height:24px;"></i>
+  </a>
+  <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20an%20appointment." target="_blank" class="floating-side-btn float-wa-right" title="Chat on WhatsApp">
+    <i data-lucide="message-circle" style="width:26px; height:26px;"></i>
+  </a>
 
   <!-- Top Strip -->
   <div class="top-strip">
     <div class="container top-strip-wrap">
       <div style="display: flex; align-items: center; gap: 15px;">
         <span class="badge-pill-top"><i data-lucide="shield-check" style="width:14px;"></i> Verified Lucknow Dental Clinic</span>
-        <span>Google Rating: <strong>5.0 ★★★★★</strong> (59+ Patient Reviews)</span>
+        <span>Google Rating: <strong>5.0 ★★★★★</strong> (64+ Patient Reviews)</span>
       </div>
       <div>
         <span>📍 1st Floor, Chitra Complex, Ambedkar Chauraha, Takrohi | 📞 +91 77558 46498</span>
@@ -388,7 +449,7 @@
             </div>
             <div class="trust-stat">
               <strong>5.0 ★</strong>
-              <span>Verified Google Trust</span>
+              <span>64+ Google Reviews</span>
             </div>
             <div class="trust-stat">
               <strong>100%</strong>
@@ -403,7 +464,7 @@
             <div>
               <div class="stars">★★★★★</div>
               <strong style="font-size: 0.95rem; color: var(--primary-navy);">#1 Clinic in Takrohi</strong>
-              <div style="font-size: 0.78rem; color: #64748b;">5,000+ Happy Healthy Smiles</div>
+              <div style="font-size: 0.78rem; color: #64748b;">Trusted by 5,000+ local families</div>
             </div>
           </div>
         </div>
@@ -411,7 +472,7 @@
     </div>
   </section>
 
-  <!-- DENTAL COST CALCULATOR SECTION (Inspired by Avana Dental) -->
+  <!-- DENTAL COST CALCULATOR -->
   <section class="calculator-sec" id="calculator">
     <div class="container">
       <div class="sec-header">
@@ -468,147 +529,690 @@
     </div>
   </section>
 
-  <!-- DETAILED TREATMENTS SECTION (With Specific Details & Action Buttons) -->
+  <!-- 1. DETAILED DENTAL TREATMENTS (AUTOMATIC SLIDER) -->
   <section class="treatments-sec" id="treatments">
     <div class="container">
       <div class="sec-header">
         <span class="section-tag">+ SPECIALIZED PROCEDURES</span>
         <h2 class="section-heading">Detailed Dental Treatments & Care</h2>
-        <p class="sec-sub">Click 'Calculate Cost' on any treatment to load its exact price in the estimator above.</p>
+        <p class="sec-sub">Avana-style auto-sliding list. Click 'Cost Estimator' to load any price above.</p>
       </div>
 
-      <div class="treatment-grid">
-        <!-- Treatment 1: RCT -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="activity"></i></div>
-              <span class="treatment-price-badge">Starts ₹2,500</span>
-            </div>
-            <h3 class="treatment-name">Single-Sitting Rotary RCT</h3>
-            <p class="treatment-desc">Save infected natural teeth with computerized rotary files. Complete nerve cleaning and root filling with zero stress.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Procedure Duration:</span> <strong>35 - 45 Minutes</strong></div>
-              <div class="spec-row"><span>Recovery Time:</span> <strong>Immediate / Same Day</strong></div>
-              <div class="spec-row"><span>Anesthesia Type:</span> <strong>Gentle Local Numbing</strong></div>
-              <div class="spec-row"><span>Hospital Visits:</span> <strong>1-2 Sessions</strong></div>
-            </div>
-          </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('2500', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Single-Sitting%20RCT." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
-          </div>
-        </div>
+      <div class="slider-container-wrap">
+        <button class="slider-nav-btn prev" onclick="slideTrack('treatTrack', -1)"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-nav-btn next" onclick="slideTrack('treatTrack', 1)"><i data-lucide="chevron-right"></i></button>
 
-        <!-- Treatment 2: Scaling -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="sparkles"></i></div>
-              <span class="treatment-price-badge">Starts ₹800</span>
-            </div>
-            <h3 class="treatment-name">Ultrasonic Teeth Scaling & Polish</h3>
-            <p class="treatment-desc">Painlessly dislodge stubborn tartar, gutka/pan/tea stains, and bacterial calculus to cure bleeding gums and bad breath.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Procedure Duration:</span> <strong>25 - 30 Minutes</strong></div>
-              <div class="spec-row"><span>Recovery Time:</span> <strong>Immediate Freshness</strong></div>
-              <div class="spec-row"><span>Enamel Safety:</span> <strong>100% Enamel Preserved</strong></div>
-              <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Session</strong></div>
+        <div class="slider-track" id="treatTrack" data-auto="true">
+          <!-- Slide 1: RCT -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="activity"></i></div>
+                  <span class="treatment-price-badge">Starts ₹2,500</span>
+                </div>
+                <h3 class="treatment-name">Single-Sitting Rotary RCT</h3>
+                <p class="treatment-desc">Save infected natural teeth with computerized rotary files. Complete nerve cleaning and root filling with zero stress.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Procedure Duration:</span> <strong>35 - 45 Minutes</strong></div>
+                  <div class="spec-row"><span>Recovery Time:</span> <strong>Immediate / Same Day</strong></div>
+                  <div class="spec-row"><span>Anesthesia Type:</span> <strong>Gentle Local Numbing</strong></div>
+                  <div class="spec-row"><span>Hospital Visits:</span> <strong>1-2 Sessions</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('2500', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Single-Sitting%20RCT." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
             </div>
           </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('800', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Teeth%20Scaling%20and%20Polishing." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
-          </div>
-        </div>
 
-        <!-- Treatment 3: Extractions -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="shield-alert"></i></div>
-              <span class="treatment-price-badge">Starts ₹600</span>
-            </div>
-            <h3 class="treatment-name">Painless Tooth Extraction</h3>
-            <p class="treatment-desc">Trauma-free removal of fractured roots, infected milk teeth, or wisdom teeth using localized anesthetic protocols.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Procedure Duration:</span> <strong>15 - 25 Minutes</strong></div>
-              <div class="spec-row"><span>Recovery Time:</span> <strong>24 - 48 Hours</strong></div>
-              <div class="spec-row"><span>Pain Management:</span> <strong>Proactive Numbing & Meds</strong></div>
-              <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Visit</strong></div>
+          <!-- Slide 2: Scaling -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="sparkles"></i></div>
+                  <span class="treatment-price-badge">Starts ₹800</span>
+                </div>
+                <h3 class="treatment-name">Ultrasonic Teeth Scaling & Polish</h3>
+                <p class="treatment-desc">Painlessly dislodge stubborn tartar, gutka/pan/tea stains, and bacterial calculus to cure bleeding gums and bad breath.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Procedure Duration:</span> <strong>25 - 30 Minutes</strong></div>
+                  <div class="spec-row"><span>Recovery Time:</span> <strong>Immediate Freshness</strong></div>
+                  <div class="spec-row"><span>Enamel Safety:</span> <strong>100% Enamel Preserved</strong></div>
+                  <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Session</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('800', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Teeth%20Scaling%20and%20Polishing." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
             </div>
           </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('600', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Painless%20Tooth%20Extraction." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
-          </div>
-        </div>
 
-        <!-- Treatment 4: Zirconia Crowns -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="gem"></i></div>
-              <span class="treatment-price-badge">Starts ₹4,500</span>
-            </div>
-            <h3 class="treatment-name">Zirconia Crowns & Ceramic Caps</h3>
-            <p class="treatment-desc">Reinforce treated teeth with high-strength, lifetime-warranty tooth-colored zirconia caps fabricated with exact bite matching.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Procedure Duration:</span> <strong>2 Visits (Digital Fit)</strong></div>
-              <div class="spec-row"><span>Material Grade:</span> <strong>Premium Medical Zirconia</strong></div>
-              <div class="spec-row"><span>Durability:</span> <strong>15+ Years / Lifetime</strong></div>
-              <div class="spec-row"><span>Color Match:</span> <strong>100% Natural Tooth Shade</strong></div>
+          <!-- Slide 3: Extractions -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="shield-alert"></i></div>
+                  <span class="treatment-price-badge">Starts ₹600</span>
+                </div>
+                <h3 class="treatment-name">Painless Tooth Extraction</h3>
+                <p class="treatment-desc">Trauma-free removal of fractured roots, infected milk teeth, or wisdom teeth using localized anesthetic protocols.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Procedure Duration:</span> <strong>15 - 25 Minutes</strong></div>
+                  <div class="spec-row"><span>Recovery Time:</span> <strong>24 - 48 Hours</strong></div>
+                  <div class="spec-row"><span>Pain Management:</span> <strong>Proactive Numbing & Meds</strong></div>
+                  <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Visit</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('600', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Painless%20Tooth%20Extraction." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
             </div>
           </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('4500', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Zirconia%20Crowns." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
-          </div>
-        </div>
 
-        <!-- Treatment 5: Dentures -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="smile"></i></div>
-              <span class="treatment-price-badge">Starts ₹12,000</span>
-            </div>
-            <h3 class="treatment-name">Complete Denture Prosthetics</h3>
-            <p class="treatment-desc">Lightweight, unbreakable dentures designed to restore chewing efficiency and youthfulness for senior family members.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Custom Moulding:</span> <strong>High-Precision Casting</strong></div>
-              <div class="spec-row"><span>Chewing Comfort:</span> <strong>Enhanced Ridge Grip</strong></div>
-              <div class="spec-row"><span>Trial Phase:</span> <strong>Included Free of Cost</strong></div>
-              <div class="spec-row"><span>Hospital Visits:</span> <strong>3 Short Friendly Visits</strong></div>
+          <!-- Slide 4: Crowns -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="gem"></i></div>
+                  <span class="treatment-price-badge">Starts ₹4,500</span>
+                </div>
+                <h3 class="treatment-name">Zirconia Crowns & Caps</h3>
+                <p class="treatment-desc">Reinforce treated teeth with high-strength, lifetime-warranty tooth-colored zirconia caps fabricated with exact bite matching.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Procedure Duration:</span> <strong>2 Visits (Digital Fit)</strong></div>
+                  <div class="spec-row"><span>Material Grade:</span> <strong>Premium Medical Zirconia</strong></div>
+                  <div class="spec-row"><span>Durability:</span> <strong>15+ Years / Lifetime</strong></div>
+                  <div class="spec-row"><span>Color Match:</span> <strong>100% Natural Tooth Shade</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('4500', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Zirconia%20Crowns." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
             </div>
           </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('12000', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Full%20Dentures." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
-          </div>
-        </div>
 
-        <!-- Treatment 6: Fillings -->
-        <div class="treatment-card-detailed">
-          <div>
-            <div class="card-top-row">
-              <div class="treatment-icon-wrap"><i data-lucide="shield-check"></i></div>
-              <span class="treatment-price-badge">Starts ₹1,200</span>
-            </div>
-            <h3 class="treatment-name">Laser Tooth-Colored Fillings</h3>
-            <p class="treatment-desc">Restore decayed cavities permanently using German light-cure composite that binds seamlessly to natural enamel.</p>
-            <div class="treatment-specs-list">
-              <div class="spec-row"><span>Procedure Duration:</span> <strong>20 - 30 Minutes</strong></div>
-              <div class="spec-row"><span>Aesthetics:</span> <strong>Invisible Natural Match</strong></div>
-              <div class="spec-row"><span>Eating Restriction:</span> <strong>None (Eat in 1 Hour)</strong></div>
-              <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Visit</strong></div>
+          <!-- Slide 5: Dentures -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="smile"></i></div>
+                  <span class="treatment-price-badge">Starts ₹12,000</span>
+                </div>
+                <h3 class="treatment-name">Complete Denture Prosthetics</h3>
+                <p class="treatment-desc">Lightweight, unbreakable dentures designed to restore chewing efficiency and youthfulness for senior family members.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Custom Moulding:</span> <strong>High-Precision Casting</strong></div>
+                  <div class="spec-row"><span>Chewing Comfort:</span> <strong>Enhanced Ridge Grip</strong></div>
+                  <div class="spec-row"><span>Trial Phase:</span> <strong>Included Free of Cost</strong></div>
+                  <div class="spec-row"><span>Hospital Visits:</span> <strong>3 Short Friendly Visits</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('12000', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20consult%20for%20Full%20Dentures." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
             </div>
           </div>
-          <div class="treatment-card-actions">
-            <button onclick="setCalcValue('1200', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Tooth%20Filling." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+
+          <!-- Slide 6: Fillings -->
+          <div class="slider-slide">
+            <div class="treatment-card-detailed">
+              <div>
+                <div class="card-top-row">
+                  <div class="treatment-icon-wrap"><i data-lucide="shield-check"></i></div>
+                  <span class="treatment-price-badge">Starts ₹1,200</span>
+                </div>
+                <h3 class="treatment-name">Laser Tooth-Colored Fillings</h3>
+                <p class="treatment-desc">Restore decayed cavities permanently using German light-cure composite that binds seamlessly to natural enamel.</p>
+                <div class="treatment-specs-list">
+                  <div class="spec-row"><span>Procedure Duration:</span> <strong>20 - 30 Minutes</strong></div>
+                  <div class="spec-row"><span>Aesthetics:</span> <strong>Invisible Natural Match</strong></div>
+                  <div class="spec-row"><span>Eating Restriction:</span> <strong>None (Eat in 1 Hour)</strong></div>
+                  <div class="spec-row"><span>Hospital Visits:</span> <strong>1 Single Visit</strong></div>
+                </div>
+              </div>
+              <div class="treatment-card-actions">
+                <button onclick="setCalcValue('1200', 1)" class="btn-card-calc"><i data-lucide="calculator" style="width:14px;"></i> Cost Estimator</button>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20Tooth%20Filling." target="_blank" class="btn-card-wa"><i data-lucide="message-circle" style="width:14px;"></i> WhatsApp</a>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="slider-dots" id="treatTrackDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CURATED DENTAL PACKAGES (AUTOMATIC SLIDER) -->
+  <section class="packages-sec" id="packages">
+    <div class="container">
+      <div class="sec-header">
+        <span class="section-tag">+ ALL-INCLUSIVE PLANS</span>
+        <h2 class="section-heading">Curated Dental Care Packages</h2>
+        <p class="sec-sub">Swipeable healthcare packages crafted for individuals and families in Lucknow.</p>
+      </div>
+
+      <div class="slider-container-wrap">
+        <button class="slider-nav-btn prev" onclick="slideTrack('packTrack', -1)"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-nav-btn next" onclick="slideTrack('packTrack', 1)"><i data-lucide="chevron-right"></i></button>
+
+        <div class="slider-track" id="packTrack" data-auto="true">
+          <!-- Package 1 -->
+          <div class="slider-slide">
+            <div class="package-card">
+              <div class="package-header">
+                <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Basic Smile Check</h4>
+                <div class="package-price">₹499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ visit</span></div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Ideal for first-time visitors & routine checkup</p>
+              </div>
+              <div class="package-body">
+                <ul class="package-features">
+                  <li><i data-lucide="check-circle-2"></i> Comprehensive Oral Examination</li>
+                  <li><i data-lucide="check-circle-2"></i> Digital X-Ray (If Required)</li>
+                  <li><i data-lucide="check-circle-2"></i> Gum Health & Hygiene Analysis</li>
+                  <li><i data-lucide="check-circle-2"></i> 10% OFF on Further Treatments</li>
+                </ul>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Basic%20Smile%20Check%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package 2 -->
+          <div class="slider-slide">
+            <div class="package-card">
+              <span class="package-badge">POPULAR</span>
+              <div class="package-header">
+                <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Sparkling Clean & Polish</h4>
+                <div class="package-price">₹1,199 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ session</span></div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Best for removing tough stains, tartar & odor</p>
+              </div>
+              <div class="package-body">
+                <ul class="package-features">
+                  <li><i data-lucide="check-circle-2"></i> Ultrasonic Scaling & Tartar Removal</li>
+                  <li><i data-lucide="check-circle-2"></i> Advanced Tooth Polishing</li>
+                  <li><i data-lucide="check-circle-2"></i> Gum Bleeding & Pyorrhea Check</li>
+                  <li><i data-lucide="check-circle-2"></i> Freshness Care Guide</li>
+                </ul>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Sparkling%20Clean%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package 3 -->
+          <div class="slider-slide">
+            <div class="package-card">
+              <div class="package-header">
+                <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Wedding & Event Glow</h4>
+                <div class="package-price">₹3,499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;"><s>₹5,000</s></span></div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Instant teeth makeover for weddings & events</p>
+              </div>
+              <div class="package-body">
+                <ul class="package-features">
+                  <li><i data-lucide="check-circle-2"></i> Deep Ultrasonic Stain Removal</li>
+                  <li><i data-lucide="check-circle-2"></i> Instant Teeth Brightening</li>
+                  <li><i data-lucide="check-circle-2"></i> Smile Symmetry & Tooth Shaping</li>
+                  <li><i data-lucide="check-circle-2"></i> Long-Lasting Freshness Kit</li>
+                </ul>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Wedding%20and%20Event%20Glow%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package 4 -->
+          <div class="slider-slide">
+            <div class="package-card">
+              <div class="package-header">
+                <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Senior Smile Restoration</h4>
+                <div class="package-price">₹1,499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ person</span></div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Tailored for seniors (55+) & loose teeth care</p>
+              </div>
+              <div class="package-body">
+                <ul class="package-features">
+                  <li><i data-lucide="check-circle-2"></i> Complete Denture / Bone Assessment</li>
+                  <li><i data-lucide="check-circle-2"></i> Deep Gum Health Evaluation</li>
+                  <li><i data-lucide="check-circle-2"></i> 1 Gentle Tooth Extraction (If Needed)</li>
+                  <li><i data-lucide="check-circle-2"></i> Priority Family Consultation</li>
+                </ul>
+                <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Senior%20Smile%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots" id="packTrackDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PATIENT TRANSFORMATIONS (AUTOMATIC SLIDER WITH +4 PLACEHOLDERS) -->
+  <section class="cases-sec" id="cases">
+    <div class="container">
+      <div class="sec-header">
+        <span class="section-tag">+ REAL DOCUMENTED RESULTS</span>
+        <h2 class="section-heading">Patient Transformations (Before & After)</h2>
+        <p class="sec-sub">See real clinical changes. Additional blocks ready for upcoming clinical photos.</p>
+      </div>
+
+      <div class="slider-container-wrap">
+        <button class="slider-nav-btn prev" onclick="slideTrack('caseTrack', -1)"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-nav-btn next" onclick="slideTrack('caseTrack', 1)"><i data-lucide="chevron-right"></i></button>
+
+        <div class="slider-track" id="caseTrack" data-auto="true">
+          <!-- Case 1 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-split-img">
+                <div class="img-box">
+                  <img src="patient1_before.jpg" alt="Severe Stains Before">
+                  <span class="case-tag">BEFORE</span>
+                </div>
+                <div class="img-box">
+                  <img src="patient1_after.jpg" alt="Clean Smile After">
+                  <span class="case-tag" style="background:#10b981;">AFTER</span>
+                </div>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Severe Tobacco & Plaque Removal</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Deep stains and calculus removed in a single comfortable session without damaging enamel.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-split-img">
+                <div class="img-box">
+                  <img src="patient2_before.jpg" alt="Missing Teeth Before Denture">
+                  <span class="case-tag">BEFORE</span>
+                </div>
+                <div class="img-box">
+                  <img src="patient2_after.jpg" alt="Full Denture Smile Restored">
+                  <span class="case-tag" style="background:#10b981;">AFTER</span>
+                </div>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Senior Denture Smile Recovery</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Restoration of missing teeth with custom comfortable dentures for healthy chewing and speaking.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-split-img">
+                <div class="img-box">
+                  <img src="patient3_before.jpg" alt="Pyorrhea Tartar Before">
+                  <span class="case-tag">BEFORE</span>
+                </div>
+                <div class="img-box">
+                  <img src="patient3_after.jpg" alt="Gums Cleaned After">
+                  <span class="case-tag" style="background:#10b981;">AFTER</span>
+                </div>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Calculus Scaling & Polishing</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Elimination of bacterial gum buildup to stop bleeding gums and foul breath permanently.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Placeholder 4 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-placeholder-box">
+                <i data-lucide="image-plus" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Transformation #4</strong>
+                <small>Single-Sitting RCT Root Recovery</small>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Rotary RCT Restoration</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Severe decay sealed and restored with natural tooth colored crown.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Placeholder 5 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-placeholder-box">
+                <i data-lucide="image-plus" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Transformation #5</strong>
+                <small>Zirconia Smile Designing</small>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Aesthetic Smile Designing</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Gap closure and symmetry alignment for wedding makeover.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Placeholder 6 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-placeholder-box">
+                <i data-lucide="image-plus" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Transformation #6</strong>
+                <small>Kids Pediatric Cavity Filling</small>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Pediatric Cavity Sealant</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Painless light cure composite protection for children's teeth.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case Placeholder 7 -->
+          <div class="slider-slide">
+            <div class="case-card">
+              <div class="case-placeholder-box">
+                <i data-lucide="image-plus" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Transformation #7</strong>
+                <small>Cast Partial Denture (CPD)</small>
+              </div>
+              <div class="case-content">
+                <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Partial Tooth Replacement</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Precise bite restoration without cutting adjacent healthy teeth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots" id="caseTrackDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DOCTORS IN ACTION (AUTOMATIC SLIDER WITH +4 PLACEHOLDERS) -->
+  <section class="action-sec" id="doctors-work">
+    <div class="container">
+      <div class="sec-header">
+        <span class="section-tag">+ HYGIENE & METHODOLOGY</span>
+        <h2 class="section-heading">Dr. Ranjana Arya In Action</h2>
+        <p class="sec-sub">Watch clinical procedures with sterile instruments. Additional slots ready for upcoming videos.</p>
+      </div>
+
+      <div class="slider-container-wrap">
+        <button class="slider-nav-btn prev" onclick="slideTrack('actionTrack', -1)"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-nav-btn next" onclick="slideTrack('actionTrack', 1)"><i data-lucide="chevron-right"></i></button>
+
+        <div class="slider-track" id="actionTrack" data-auto="true">
+          <!-- Video 1 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <video controls playsinline preload="metadata" poster="doctor.jpg.jpeg">
+                <source src="doc_action1.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Precision Tooth Scaling</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Gentle ultrasonic cleaning with zero pain.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <video controls playsinline preload="metadata" poster="patient1_before.jpg">
+                <source src="doc_action2.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Cavity Assessment</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Comprehensive check of tooth roots & cavities.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <video controls playsinline preload="metadata" poster="pediatric.jpg.jpeg">
+                <source src="doc_action3.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Mirror Check With Patient</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Immediate visible results verified by patient.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <video controls playsinline preload="metadata" poster="doctor.jpg.jpeg">
+                <source src="doc_action4.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Gentle Extraction Technique</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Trauma-free procedure with soothing care.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Video Placeholder 5 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <div class="case-placeholder-box" style="min-height:310px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Action Video #5</strong>
+                <small>Single-Sitting Rotary RCT Live</small>
+              </div>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Rotary Motor Operation</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Pain-managed root canal precision tools.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Video Placeholder 6 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <div class="case-placeholder-box" style="min-height:310px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Action Video #6</strong>
+                <small>Sterilization & Autoclave Protocol</small>
+              </div>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">100% Sterile Setup</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Unpacking sealed instruments before treatment.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Video Placeholder 7 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <div class="case-placeholder-box" style="min-height:310px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Action Video #7</strong>
+                <small>Digital Bite Impression</small>
+              </div>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Crown & Bridge Fitting</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Digital precision measurement for natural caps.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Video Placeholder 8 -->
+          <div class="slider-slide">
+            <div class="action-card">
+              <div class="case-placeholder-box" style="min-height:310px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Action Video #8</strong>
+                <small>Kids Friendly Examination</small>
+              </div>
+              <div class="action-card-info">
+                <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Pediatric Consultation</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Stress-free checkup with young patients.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots" id="actionTrackDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. REAL PATIENT VIDEO TESTIMONIALS (AUTOMATIC SLIDER WITH +4 PLACEHOLDERS) -->
+  <section class="testi-sec" id="testimonials">
+    <div class="container">
+      <div class="sec-header">
+        <span class="section-tag">+ PATIENT EXPERIENCES</span>
+        <h2 class="section-heading">Real Patient Video Testimonials</h2>
+        <p class="sec-sub">Genuine reviews straight from our clinic in Lucknow. Additional slots ready for upcoming reviews.</p>
+      </div>
+
+      <div class="slider-container-wrap">
+        <button class="slider-nav-btn prev" onclick="slideTrack('testiTrack', -1)"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-nav-btn next" onclick="slideTrack('testiTrack', 1)"><i data-lucide="chevron-right"></i></button>
+
+        <div class="slider-track" id="testiTrack" data-auto="true">
+          <!-- Review 1 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <video controls playsinline preload="metadata" poster="patient1_after.jpg">
+                <source src="review_guy.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">"Daant Ekdum Clean Kar Diya"</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "Mujhe treatment bahut badhiya laga. Ek hi din me unhone daant bilkul clean aur sahi kar diya. Highly satisfied!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <video controls playsinline preload="metadata" poster="patient3_after.jpg">
+                <source src="review2.mp4.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Infection Cleaning & Pyorrhea Relief</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "I had heavy bacterial infection. In just one session, 99.9% buildup cleared with great patience and care."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <video controls playsinline preload="metadata" poster="patient2_after.jpg">
+                <source src="review_uncle.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">"Daant Ki Safai Bahut Acchi Rahi"</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "Doctor madam ne bahut aaram se kaam kiya aur result bahut accha raha. Poori team cooperative hai."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <video controls playsinline preload="metadata" poster="pediatric.jpg.jpeg">
+                <source src="review1.mp4.mp4#t=0.001" type="video/mp4">
+              </video>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Shambhavi's Scaling Experience</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "Teeth cleaning was completely pain-free, and my smile feels clean and confident!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Placeholder 5 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <div class="case-placeholder-box" style="min-height:320px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Review #5</strong>
+                <small>Single-Sitting RCT Patient Feedback</small>
+              </div>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Pain-Free RCT Feedback</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "Severe toothache resolved in one visit without discomfort."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Placeholder 6 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <div class="case-placeholder-box" style="min-height:320px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Review #6</strong>
+                <small>Full Denture Senior Feedback</small>
+              </div>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Comfortable Senior Dentures</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "Natural chewing restored. Great care taken by Dr. Ranjana."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Placeholder 7 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <div class="case-placeholder-box" style="min-height:320px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Review #7</strong>
+                <small>Wisdom Tooth Extraction Experience</small>
+              </div>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Easy Wisdom Tooth Removal</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "No swelling, no panic. Doctor guided gently throughout."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial Placeholder 8 -->
+          <div class="slider-slide">
+            <div class="testi-card">
+              <div class="case-placeholder-box" style="min-height:320px;">
+                <i data-lucide="video" style="width:36px; height:36px; margin-bottom:8px; color: var(--primary-blue);"></i>
+                <strong style="color: var(--primary-navy); font-size: 0.95rem;">Upcoming Review #8</strong>
+                <small>Child's First Dental Visit</small>
+              </div>
+              <div class="testi-card-content">
+                <div class="stars">★★★★★</div>
+                <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Friendly Pediatric Dental Care</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  "My kid had zero fear. Excellent caring environment."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots" id="testiTrackDots"></div>
       </div>
     </div>
   </section>
@@ -640,263 +1244,6 @@
             <a href="#appointment" class="btn-hero-primary" style="padding: 12px 26px;">
               Consult Dr. Ranjana Arya &rarr;
             </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Curated Packages -->
-  <section class="packages-sec" id="packages">
-    <div class="container">
-      <div class="sec-header">
-        <span class="section-tag">+ ALL-INCLUSIVE PLANS</span>
-        <h2 class="section-heading">Curated Dental Care Packages</h2>
-        <p class="sec-sub">Affordable, all-inclusive packages for individuals and families in Lucknow.</p>
-      </div>
-      <div class="packages-grid">
-        <div class="package-card">
-          <div class="package-header">
-            <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Basic Smile Check</h4>
-            <div class="package-price">₹499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ visit</span></div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Ideal for first-time visitors & routine checkup</p>
-          </div>
-          <div class="package-body">
-            <ul class="package-features">
-              <li><i data-lucide="check-circle-2"></i> Comprehensive Oral Examination</li>
-              <li><i data-lucide="check-circle-2"></i> Digital X-Ray (If Required)</li>
-              <li><i data-lucide="check-circle-2"></i> Gum Health & Hygiene Analysis</li>
-              <li><i data-lucide="check-circle-2"></i> 10% OFF on Further Treatments</li>
-            </ul>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Basic%20Smile%20Check%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
-          </div>
-        </div>
-        <div class="package-card">
-          <span class="package-badge">POPULAR</span>
-          <div class="package-header">
-            <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Sparkling Clean & Polish</h4>
-            <div class="package-price">₹1,199 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ session</span></div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Best for removing tough stains, tartar & odor</p>
-          </div>
-          <div class="package-body">
-            <ul class="package-features">
-              <li><i data-lucide="check-circle-2"></i> Ultrasonic Scaling & Tartar Removal</li>
-              <li><i data-lucide="check-circle-2"></i> Advanced Tooth Polishing</li>
-              <li><i data-lucide="check-circle-2"></i> Gum Bleeding & Pyorrhea Check</li>
-              <li><i data-lucide="check-circle-2"></i> Freshness Care Guide</li>
-            </ul>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Sparkling%20Clean%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-header">
-            <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Wedding & Event Glow</h4>
-            <div class="package-price">₹3,499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;"><s>₹5,000</s></span></div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Instant teeth makeover for weddings & events</p>
-          </div>
-          <div class="package-body">
-            <ul class="package-features">
-              <li><i data-lucide="check-circle-2"></i> Deep Ultrasonic Stain Removal</li>
-              <li><i data-lucide="check-circle-2"></i> Instant Teeth Brightening</li>
-              <li><i data-lucide="check-circle-2"></i> Smile Symmetry & Tooth Shaping</li>
-              <li><i data-lucide="check-circle-2"></i> Long-Lasting Freshness Kit</li>
-            </ul>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Wedding%20and%20Event%20Glow%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-header">
-            <h4 style="color: var(--primary-navy); font-size: 1.15rem;">Senior Smile Restoration</h4>
-            <div class="package-price">₹1,499 <span style="font-size: 0.85rem; color:#94a3b8; font-weight:400;">/ person</span></div>
-            <p style="font-size: 0.82rem; color: var(--text-muted);">Tailored for seniors (55+) & loose teeth care</p>
-          </div>
-          <div class="package-body">
-            <ul class="package-features">
-              <li><i data-lucide="check-circle-2"></i> Complete Denture / Bone Assessment</li>
-              <li><i data-lucide="check-circle-2"></i> Deep Gum Health Evaluation</li>
-              <li><i data-lucide="check-circle-2"></i> 1 Gentle Tooth Extraction (If Needed)</li>
-              <li><i data-lucide="check-circle-2"></i> Priority Family Consultation</li>
-            </ul>
-            <a href="https://wa.me/917755846498?text=Hello%20Arya%20Dental%20Clinic,%20I%20want%20to%20book%20the%20Senior%20Smile%20package." target="_blank" class="btn-pack-wa">Book on WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Transformations (Before/After) -->
-  <section class="cases-sec" id="cases">
-    <div class="container">
-      <div class="sec-header">
-        <span class="section-tag">+ REAL DOCUMENTED RESULTS</span>
-        <h2 class="section-heading">Patient Transformations</h2>
-        <p class="sec-sub">See how ultrasonic scaling and restorative care bring back confident smiles.</p>
-      </div>
-      <div class="cases-grid">
-        <div class="case-card">
-          <div class="case-split-img">
-            <div class="img-box">
-              <img src="patient1_before.jpg" alt="Severe Stains Before">
-              <span class="case-tag">BEFORE</span>
-            </div>
-            <div class="img-box">
-              <img src="patient1_after.jpg" alt="Clean Smile After">
-              <span class="case-tag" style="background:#10b981;">AFTER</span>
-            </div>
-          </div>
-          <div class="case-content">
-            <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Severe Tobacco & Plaque Removal</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Deep stains and calculus removed in a single comfortable session without damaging enamel.</p>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-split-img">
-            <div class="img-box">
-              <img src="patient2_before.jpg" alt="Missing Teeth Before Denture">
-              <span class="case-tag">BEFORE</span>
-            </div>
-            <div class="img-box">
-              <img src="patient2_after.jpg" alt="Full Denture Smile Restored">
-              <span class="case-tag" style="background:#10b981;">AFTER</span>
-            </div>
-          </div>
-          <div class="case-content">
-            <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Senior Denture Smile Recovery</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Restoration of missing teeth with custom comfortable dentures for healthy chewing and speaking.</p>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-split-img">
-            <div class="img-box">
-              <img src="patient3_before.jpg" alt="Pyorrhea Tartar Before">
-              <span class="case-tag">BEFORE</span>
-            </div>
-            <div class="img-box">
-              <img src="patient3_after.jpg" alt="Gums Cleaned After">
-              <span class="case-tag" style="background:#10b981;">AFTER</span>
-            </div>
-          </div>
-          <div class="case-content">
-            <h4 style="color: var(--primary-navy); margin-bottom: 6px; font-size: 1.15rem;">Calculus Scaling & Polishing</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Elimination of bacterial gum buildup to stop bleeding gums and foul breath permanently.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- In Action Videos -->
-  <section class="action-sec" id="doctors-work">
-    <div class="container">
-      <div class="sec-header">
-        <span class="section-tag">+ HYGIENE & METHODOLOGY</span>
-        <h2 class="section-heading">Dr. Ranjana Arya In Action</h2>
-        <p class="sec-sub">Watch genuine clinical procedures performed with sterile instruments.</p>
-      </div>
-      <div class="action-grid">
-        <div class="action-card">
-          <video controls playsinline preload="metadata" poster="doctor.jpg.jpeg">
-            <source src="doc_action1.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="action-card-info">
-            <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Precision Tooth Scaling</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Gentle ultrasonic cleaning with zero pain.</p>
-          </div>
-        </div>
-        <div class="action-card">
-          <video controls playsinline preload="metadata" poster="patient1_before.jpg">
-            <source src="doc_action2.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="action-card-info">
-            <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Cavity Assessment</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Comprehensive check of tooth roots & cavities.</p>
-          </div>
-        </div>
-        <div class="action-card">
-          <video controls playsinline preload="metadata" poster="pediatric.jpg.jpeg">
-            <source src="doc_action3.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="action-card-info">
-            <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Mirror Check With Patient</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Immediate visible results verified by patient.</p>
-          </div>
-        </div>
-        <div class="action-card">
-          <video controls playsinline preload="metadata" poster="doctor.jpg.jpeg">
-            <source src="doc_action4.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="action-card-info">
-            <h4 style="font-size: 1rem; color: var(--primary-navy); margin-bottom: 4px;">Gentle Extraction Technique</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Trauma-free procedure with soothing care.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Patient Reviews / Videos -->
-  <section class="testi-sec" id="testimonials">
-    <div class="container">
-      <div class="sec-header">
-        <span class="section-tag">+ PATIENT EXPERIENCES</span>
-        <h2 class="section-heading">Real Patient Video Testimonials</h2>
-        <p class="sec-sub">Listen to genuine feedback recorded right after treatment at our clinic.</p>
-      </div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <video controls playsinline preload="metadata" poster="patient1_after.jpg">
-            <source src="review_guy.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="testi-card-content">
-            <div class="stars">★★★★★</div>
-            <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">"Daant Ekdum Clean Kar Diya"</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">
-              "Mujhe treatment bahut badhiya laga. Ek hi din me unhone daant bilkul clean aur sahi kar diya. Highly satisfied!"
-            </p>
-          </div>
-        </div>
-        <div class="testi-card">
-          <video controls playsinline preload="metadata" poster="patient3_after.jpg">
-            <source src="review2.mp4.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="testi-card-content">
-            <div class="stars">★★★★★</div>
-            <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Infection Cleaning & Pyorrhea Relief</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">
-              "I had heavy bacterial infection. In just one session, 99.9% buildup cleared with great patience and care."
-            </p>
-          </div>
-        </div>
-        <div class="testi-card">
-          <video controls playsinline preload="metadata" poster="patient2_after.jpg">
-            <source src="review_uncle.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="testi-card-content">
-            <div class="stars">★★★★★</div>
-            <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">"Daant Ki Safai Bahut Acchi Rahi"</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">
-              "Doctor madam ne bahut aaram se kaam kiya aur result bahut accha raha. Poori team cooperative hai."
-            </p>
-          </div>
-        </div>
-        <div class="testi-card">
-          <video controls playsinline preload="metadata" poster="pediatric.jpg.jpeg">
-            <source src="review1.mp4.mp4#t=0.001" type="video/mp4">
-            Your browser does not support the video.
-          </video>
-          <div class="testi-card-content">
-            <div class="stars">★★★★★</div>
-            <h4 style="color: var(--primary-navy); margin: 6px 0 4px;">Shambhavi's Scaling Experience</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">
-              "Teeth cleaning was completely pain-free, and my smile feels clean and confident!"
-            </p>
           </div>
         </div>
       </div>
@@ -1131,6 +1478,7 @@
         lucide.createIcons();
       }
       updateCalculator();
+      initAllSliders();
     });
 
     // Set Dynamic Year
@@ -1167,7 +1515,6 @@
       const plan = document.getElementById('calcPaymentPlan').value;
       const teethGroup = document.getElementById('teethCountGroup');
 
-      // Hide teeth slider for checkup or full arch
       if (basePrice === 499 || basePrice === 800 || basePrice === 12000) {
         teethGroup.style.display = 'none';
       } else {
@@ -1199,7 +1546,70 @@
       document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // WhatsApp Booking Form Trigger
+    // ==========================================================
+    // AUTO SLIDER & ARROW CONTROLS ENGINE (AVANA DENTAL REPLICATED)
+    // ==========================================================
+    const sliderTracks = ['treatTrack', 'packTrack', 'caseTrack', 'actionTrack', 'testiTrack'];
+
+    function slideTrack(trackId, direction) {
+      const track = document.getElementById(trackId);
+      if (!track) return;
+      const slide = track.querySelector('.slider-slide');
+      const step = slide ? slide.offsetWidth + 24 : 320;
+      
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (direction === 1 && track.scrollLeft >= maxScroll - 10) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else if (direction === -1 && track.scrollLeft <= 10) {
+        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: direction * step, behavior: 'smooth' });
+      }
+    }
+
+    function initAllSliders() {
+      sliderTracks.forEach(trackId => {
+        const track = document.getElementById(trackId);
+        const dotsContainer = document.getElementById(trackId + 'Dots');
+        if (!track || !dotsContainer) return;
+
+        const slides = track.querySelectorAll('.slider-slide');
+        dotsContainer.innerHTML = '';
+
+        slides.forEach((_, idx) => {
+          const dot = document.createElement('div');
+          dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
+          dot.onclick = () => {
+            const step = slides[0].offsetWidth + 24;
+            track.scrollTo({ left: idx * step, behavior: 'smooth' });
+          };
+          dotsContainer.appendChild(dot);
+        });
+
+        // Sync active dot on user manual scroll
+        track.addEventListener('scroll', () => {
+          const step = slides[0].offsetWidth + 24;
+          const activeIndex = Math.round(track.scrollLeft / step);
+          const dots = dotsContainer.querySelectorAll('.slider-dot');
+          dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+        });
+
+        // Auto move timer every 3.5 seconds
+        let autoTimer = setInterval(() => {
+          slideTrack(trackId, 1);
+        }, 3500);
+
+        // Pause on hover
+        track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+        track.addEventListener('mouseleave', () => {
+          autoTimer = setInterval(() => {
+            slideTrack(trackId, 1);
+          }, 3500);
+        });
+      });
+    }
+
+    // WhatsApp Appointment Trigger
     function handleBooking(e) {
       e.preventDefault();
       const name = document.getElementById('pName').value.trim();
